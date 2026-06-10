@@ -45,10 +45,6 @@ public class Patient {
     )
     private String email;
 
-    @OneToOne
-    @MapsId
-    private User user;
-
     @CreationTimestamp
     @Column(
             updatable = false
