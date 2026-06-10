@@ -3,6 +3,11 @@ package com.example.UserSecurity.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -24,5 +29,10 @@ public class Doctor {
     @Column(unique = true, length = 100)
     private String email;
 
+    @ManyToMany(mappedBy = "doctors")
+    private Set<Department> departments=new HashSet<>();
+
+    @OneToMany(mappedBy = "doctor")
+    private List<Appointment> appointments = new ArrayList<>();
 
 }
