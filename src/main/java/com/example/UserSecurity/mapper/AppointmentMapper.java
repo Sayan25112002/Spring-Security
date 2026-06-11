@@ -14,6 +14,6 @@ public interface AppointmentMapper {
 
     AppointmentResponseDto toAppointmentResponseDto(Appointment appointment);
 
-    List<AppointmentResponseDto> toAppointmentResponseDto(List<Appointment> appointments);
+    List<AppointmentResponseDto> toAppointmentResponseDtos(List<Appointment> appointments);
 
 }

@@ -14,6 +14,6 @@ public interface PatientMapper {
 
     PatientResponseDto toPatientResponseDto(Patient patient);
 
-    List<PatientResponseDto> toPatientResponseDto(List<Patient> patients);
+    List<PatientResponseDto> toPatientResponseDtos(List<Patient> patients);
 
 }

@@ -1,5 +1,6 @@
 package com.example.UserSecurity.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,9 +31,11 @@ public class Doctor {
     private String email;
 
     @ManyToMany(mappedBy = "doctors")
+    @JsonIgnore
     private Set<Department> departments=new HashSet<>();
 
     @OneToMany(mappedBy = "doctor")
+    @JsonIgnore
     private List<Appointment> appointments = new ArrayList<>();
 
 }

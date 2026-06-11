@@ -15,7 +15,7 @@ public class AppointmentResponseDto {
 
     private Long id;
 
-    private LocalDateTime localDateTime;
+    private LocalDateTime appointmentTime;
 
     private String reason;
 

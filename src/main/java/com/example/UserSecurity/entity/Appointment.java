@@ -1,5 +1,6 @@
 package com.example.UserSecurity.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,13 +24,13 @@ public class Appointment {
     private String reason;
 
     @ManyToOne
-    @ToString.Exclude
     @JoinColumn(name="patient_id",nullable = false)
+    @JsonIgnore
     private Patient patient;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ToString.Exclude
     @JoinColumn(nullable = false)
+    @JsonIgnore
     private Doctor doctor;
 
 }

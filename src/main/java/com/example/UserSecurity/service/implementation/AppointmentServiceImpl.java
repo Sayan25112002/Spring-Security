@@ -29,7 +29,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final PatientMapper patientMapper;
 
     @Override
-    @Transactional
     public AppointmentResponseDto createNewAppointment(AppointmentRequestDto appointmentRequestDto, Long doctorId, Long patientId) {
         Appointment appointment = appointmentMapper.toAppointment(appointmentRequestDto);
         Doctor doctor = doctorRepository.findById(doctorId).orElseThrow(()-> new EntityNotFoundException("Doctor with id: " + doctorId + " not found"));
@@ -43,7 +42,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    @Transactional
     public AppointmentResponseDto reAssignAppointmentToAnotherDoctor(Long appointmentId, Long doctorId) {
         Appointment appointment = appointmentRepository.findById(appointmentId).orElseThrow(()-> new EntityNotFoundException("Appointments with id: " + appointmentId + " not found"));
         Doctor doctor = doctorRepository.findById(doctorId).orElseThrow(()-> new EntityNotFoundException("Doctor with id: " + doctorId + " not found"));

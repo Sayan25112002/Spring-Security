@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class AppointmentRequestDto {
 
-    private LocalDateTime localDateTime;
+    private LocalDateTime appointmentTime;
 
     private String reason;
 

@@ -20,6 +20,8 @@ public class PatientResponseDto {
 
     private String name;
 
+    private String gender;
+
     private LocalDate birthDate;
 
     private String email;

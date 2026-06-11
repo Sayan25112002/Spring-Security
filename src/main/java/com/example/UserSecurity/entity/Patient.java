@@ -1,6 +1,7 @@
 package com.example.UserSecurity.entity;
 
 import com.example.UserSecurity.entity.type.BloodGroupType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,51 +27,33 @@ import java.util.List;
 public class Patient {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(
-            nullable = false,
-            length = 40
-    )
+    @Column(nullable = false, length = 40)
     private String name;
 
     private LocalDate birthDate;
 
-    @Column(
-            unique = true,
-            nullable = false
-    )
+    @Column(unique = true, nullable = false)
     private String email;
 
+    private String gender;
+
     @CreationTimestamp
-    @Column(
-            updatable = false
-    )
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @Enumerated(
-            EnumType.STRING
-    )
+    @Enumerated(EnumType.STRING)
     private BloodGroupType bloodGroupType;
 
-    @OneToOne(
-            cascade = {CascadeType.ALL},
-            orphanRemoval = true
-    )
-    @JoinColumn(
-            name = "patient_insurance_id"
-    )
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @JoinColumn(name = "patient_insurance_id")
+    @JsonIgnore
     private Insurance insurance;
 
-    @OneToMany(
-            mappedBy = "patient",
-            cascade = {CascadeType.REMOVE},
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
-    )
+    @OneToMany(mappedBy = "patient", cascade = {CascadeType.REMOVE}, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Appointment> appointments =  new ArrayList<>();
 
 }

@@ -1,5 +1,6 @@
 package com.example.UserSecurity.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class Department {
     private String name;
 
     @OneToOne
+    @JsonIgnore
     private Doctor headDoctor;
 
     @ManyToMany
@@ -28,6 +30,7 @@ public class Department {
             joinColumns = @JoinColumn(name="dpt_id"),
             inverseJoinColumns = @JoinColumn(name="doctor_id")
     )
+    @JsonIgnore
     private Set<Doctor> doctors = new HashSet<>();
 
 }

@@ -21,6 +21,8 @@ public class PatientRequestDto {
 
     private String name;
 
+    private String gender;
+
     private LocalDate birthDate;
 
     private String email;
