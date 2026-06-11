@@ -45,7 +45,9 @@ public class InsuranceServiceImpl implements InsuranceService {
         Patient patient = patientRepository.findById(patientId).orElseThrow(()-> new EntityNotFoundException("Patient Not Found"));
         Insurance insurance = insuranceMapper.toInsurance(insuranceRequestDto);
         insurance.setPatient(patient);
-        Insurance savedInsurance = insuranceRepository.save(insurance);
+        patient.setInsurance(insurance);
+        Patient savedPatient = patientRepository.save(patient);
+        Insurance savedInsurance = savedPatient.getInsurance();
         return insuranceMapper.toInsuranceResponseDto(savedInsurance);
     }
 
@@ -60,7 +62,8 @@ public class InsuranceServiceImpl implements InsuranceService {
         Insurance insurance = insuranceRepository.findById(insuranceId).orElseThrow(()-> new EntityNotFoundException("Insurance with id: " + insuranceId + " not found"));
         patient.setInsurance(insurance);
         insurance.setPatient(patient);
-        PatientResponseDto patientResponseDto = patientMapper.toPatientResponseDto(patient);
+        Patient savedPatient = patientRepository.save(patient);
+        PatientResponseDto patientResponseDto = patientMapper.toPatientResponseDto(savedPatient);
         return patientResponseDto;
     }
 
@@ -68,7 +71,8 @@ public class InsuranceServiceImpl implements InsuranceService {
     public PatientResponseDto dissociateInsuranceFromPatient(Long patientId) {
         Patient patient = patientRepository.findById(patientId).orElseThrow(()-> new EntityNotFoundException("Patient with id: " + patientId + " not found"));
         patient.setInsurance(null);
-        PatientResponseDto patientResponseDto = patientMapper.toPatientResponseDto(patient);
+        Patient savedPatient = patientRepository.save(patient);
+        PatientResponseDto patientResponseDto = patientMapper.toPatientResponseDto(savedPatient);
         return patientResponseDto;
     }
 
