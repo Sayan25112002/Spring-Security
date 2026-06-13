@@ -1,6 +1,7 @@
 package com.example.UserSecurity.security;
 
 import com.example.UserSecurity.entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -30,5 +31,14 @@ public class AuthUtil {
                 .expiration(new Date(System.currentTimeMillis()+1000*60+10))
                 .signWith(getSecretKey())
                 .compact();
+    }
+
+    public String getUserNameFromToken(String token) {
+        Claims claims = Jwts.parser()
+                .verifyWith(getSecretKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+        return claims.getSubject();
     }
 }
